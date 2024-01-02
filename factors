@@ -1,14 +1,33 @@
 #!/usr/bin/python3
+# library to get arguments
 import sys
+import math
 
-file = open(sys.argv[1], "r")
-readed = file.read().split("\n")
-for line in readed:
-    if line == "":
-        break
-    line = int(line)
-    for q in range(2, line):
-        if line % q == 0:
-            p = line // q
-            print(f"{line}={p}*{q}")
-            break
+# fn unpack number factorial
+def fc():
+    """
+    function fc to search file to convert number and format n=p*q
+    """
+    try:
+        revfile = sys.argv[1]
+        with open(revfile) as f:
+            for revnumber in f:
+                revnumber = int(revnumber)
+                if revnumber % 2 == 0:
+                        print("{}={}*{}".format(revnumber, revnumber // 2, 2))
+                        continue
+                i = 3
+                limit = math.isqrt(revnumber) + 1
+                while i < limit:
+                    if revnumber % i == 0:
+                        print("{}={}*{}".format(revnumber, revnumber // i, i))
+                        break
+                    i = i + 2
+                else:
+                    print("{}={}*{}".format(revnumber, revnumber, 1))
+    except (ValueError, IndexError):
+        pass
+
+
+# autostart
+fc()
